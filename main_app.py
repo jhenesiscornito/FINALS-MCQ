@@ -40,6 +40,11 @@ class MainApp:
                 error_label.config(text="Time limit is required.")
                 return
 
+            # Check if the time limit is a positive number
+            if not time_limit.isdigit() or int(time_limit) <= 0:
+                error_label.config(text="Time limit must be a positive number.")
+                return
+
             if not file_path[0]:
                 error_label.config(text="No file selected.")
                 return

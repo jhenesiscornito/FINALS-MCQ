@@ -17,7 +17,7 @@ class ExamGUI:
         self.center_window(exam, 1000, 700)
 
         frame = Frame(exam)
-        frame.pack()
+        frame.pack(expand=True)
 
         selected_choice = StringVar(value="")  # Initialize with an empty string
         error_label = None
@@ -43,7 +43,7 @@ class ExamGUI:
         # Convert time limit to seconds and create a label to display it
         time_left = [time_limit * 60]
         timer_label = Label(exam, text=f"Time left: {time_left[0]} seconds")
-        timer_label.pack()
+        timer_label.pack(anchor='center', expand=True)
 
         def update_timer():
             if current_question_index[0] >= total_questions:  # Check if all questions have been answered
@@ -127,7 +127,11 @@ class ExamGUI:
                 widget.destroy()
 
             question = questions[current_question_index[0]]
-            question_label = Label(frame, text=question)
+            question_label = Label(frame, text=question,
+                                   font=("Helvetica", 12, "bold"),
+                                   bg="lightblue",
+                                   fg="darkblue",
+                                   )
             question_label.pack()
 
             selected_choice.set(None)  # Reset the selected choice
@@ -137,7 +141,11 @@ class ExamGUI:
             for idx, choice in enumerate(choices):
                 choice_text = str(choice).strip()
                 choice_button = Radiobutton(frame, text=choice_text, variable=selected_choice, value=chr(65 + idx),
-                                            command=enable_submit)
+                                            command=enable_submit,
+                                            font=("Helvetica", 12, "bold"),
+                                            bg="lightblue",
+                                            fg="darkblue",
+                                            )
                 choice_button.pack()
 
         def enable_submit():
@@ -145,7 +153,7 @@ class ExamGUI:
 
         submit_button = Button(exam, text="Submit", command=check_answers,
                                state="disabled")  # Initially disable the submit button
-        submit_button.pack()
+        submit_button.pack(anchor='center', expand=True)
 
         # Start the timer
         update_timer()

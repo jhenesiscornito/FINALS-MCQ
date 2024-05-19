@@ -41,9 +41,10 @@ class ExamGUI:
         current_question_index = [0]
 
         # Convert time limit to seconds and create a label to display it
-        time_left = [time_limit * 60]
-        timer_label = Label(exam, text=f"Time left: {time_left[0]} seconds")
-        timer_label.pack(anchor='center', expand=True)
+        if time_limit is not None:
+            time_left = [time_limit * 60]
+            timer_label = Label(exam, text=f"Time left: {time_left[0]} seconds")
+            timer_label.pack(anchor='center', expand=True)
 
         def update_timer():
             if current_question_index[0] >= total_questions:  # Check if all questions have been answered
@@ -53,7 +54,7 @@ class ExamGUI:
             hours, remainder = divmod(time_left[0], 3600)
             minutes, seconds = divmod(remainder, 60)
             timer_label.config(text=f"Time left: {hours} hours, {minutes} minutes, {seconds} seconds")
-            
+
             if time_left[0] <= 0:
                 for widget in frame.winfo_children():
                     widget.destroy()
@@ -72,7 +73,7 @@ class ExamGUI:
 
                 submit_button.pack_forget()
                 return
-            
+
             # If time is not yet up, schedule the next call to update_timer
             exam.after(1000, update_timer)
 
@@ -155,8 +156,9 @@ class ExamGUI:
                                state="disabled")  # Initially disable the submit button
         submit_button.pack(anchor='center', expand=True)
 
-        # Start the timer
-        update_timer()
+        # Start the timer only if time limit is not None
+        if time_limit is not None:
+            update_timer()
 
         display_question()
 

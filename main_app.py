@@ -40,9 +40,14 @@ class MainApp:
                 error_label.config(text="Time limit is required.")
                 return
 
-            # Check if the time limit is a positive number
-            if not time_limit.isdigit() or int(time_limit) <= 0:
-                error_label.config(text="Time limit must be a positive number.")
+            # Check if the time limit is a number
+            if not time_limit.isdigit():
+                error_label.config(text="Time limit must be a number.")
+                return
+
+            time_limit = int(time_limit)
+            if time_limit < 0:
+                error_label.config(text="Time limit cannot be negative.")
                 return
 
             if not file_path[0]:
@@ -52,7 +57,8 @@ class MainApp:
             ws = self.file_handler.read_excel(file_path[0])
             if ws:
                 root.destroy()
-                self.exam_gui.create(ws, int(time_limit))
+                # If time limit is 0, pass None instead
+                self.exam_gui.create(ws, None if time_limit == 0 else time_limit)
 
         frame = Frame(root, bg=self.bg_color)
         frame.pack()

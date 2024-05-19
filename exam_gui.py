@@ -53,9 +53,28 @@ class ExamGUI:
             hours, remainder = divmod(time_left[0], 3600)
             minutes, seconds = divmod(remainder, 60)
             timer_label.config(text=f"Time left: {hours} hours, {minutes} minutes, {seconds} seconds")
-            if time_left[0] > 0:
-                # Schedule the next call to update_timer
-                exam.after(1000, update_timer)
+            
+            if time_left[0] <= 0:
+                for widget in frame.winfo_children():
+                    widget.destroy()
+
+                score_label = Label(frame, text=f"Final Score: {correct_answers} / {total_questions}")
+                score_label.pack()
+
+                # Hide the timer label
+                timer_label.pack_forget()
+
+                # Display the remaining time
+                hours, remainder = divmod(time_left[0], 3600)
+                minutes, seconds = divmod(remainder, 60)
+                remaining_time_label = Label(frame, text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds")
+                remaining_time_label.pack()
+
+                submit_button.pack_forget()
+                return
+            
+            # If time is not yet up, schedule the next call to update_timer
+            exam.after(1000, update_timer)
 
         def check_answers():
             nonlocal correct_answers, error_label

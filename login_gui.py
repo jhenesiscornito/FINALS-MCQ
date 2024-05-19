@@ -18,16 +18,20 @@ class LoginGUI:
         self.center_window(login, 500, 400)
         login.configure(bg=self.bg_color)
 
-        Label(login, text="Username", bg=self.bg_color, fg=self.fg_color).place(relx=0.5, rely=0.2, anchor='center')
-        username_entry = Entry(login, bg=self.bg_color, fg=self.fg_color)
-        username_entry.place(relx=0.5, rely=0.3, anchor='center')
+        # Title label
+        title_label = Label(login, text="TEACHER'S TOOL: MCQ RANDOMIZER", font=("Helvetica", 16, "bold"), bg=self.bg_color, fg=self.fg_color)
+        title_label.place(relx=0.5, rely=0.2, anchor='center')
 
-        Label(login, text="Password", bg=self.bg_color, fg=self.fg_color).place(relx=0.5, rely=0.4, anchor='center')
+        Label(login, text="Username", bg=self.bg_color, fg=self.fg_color).place(relx=0.5, rely=0.3, anchor='center')
+        username_entry = Entry(login, bg=self.bg_color, fg=self.fg_color)
+        username_entry.place(relx=0.5, rely=0.4, anchor='center')
+
+        Label(login, text="Password", bg=self.bg_color, fg=self.fg_color).place(relx=0.5, rely=0.5, anchor='center')
         password_entry = Entry(login, show="*", bg=self.bg_color, fg=self.fg_color)
-        password_entry.place(relx=0.5, rely=0.5, anchor='center')
+        password_entry.place(relx=0.5, rely=0.6, anchor='center')
 
         error_label = Label(login, bg=self.bg_color, fg=self.fg_color)
-        error_label.place(relx=0.5, rely=0.6, anchor='center')
+        error_label.place(relx=0.5, rely=0.7, anchor='center')
 
         attempts = [0]
 
@@ -61,8 +65,8 @@ class LoginGUI:
             else:
                 login.destroy()
 
-        login_button = Button(login, text="Login", command=check_login, bg=self.button_color, fg=self.fg_color)
-        login_button.place(relx=0.5, rely=0.7, anchor='center')
+        login_button = Button(login, text="Login", command=check_login, bg=self.button_color, fg=self.fg_color, font=("Helvetica", 9))
+        login_button.place(relx=0.5, rely=0.8, anchor='center')
 
         login.bind('<Return>', check_login)
 

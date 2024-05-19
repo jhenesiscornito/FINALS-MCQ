@@ -1,3 +1,5 @@
+import os
+import sys
 from tkinter import Tk, Button, Label, Entry, PhotoImage, Frame, Radiobutton, StringVar, Text
 from tkinter.filedialog import askopenfilename
 from login_gui import LoginGUI
@@ -90,7 +92,14 @@ class MainApp:
         instructions.config(state="disabled")
         instructions.pack(pady=30)
 
-        guide_image = PhotoImage(file="img/guide.PNG")
+        # Define the resource_path function
+        def resource_path(relative_path):
+            """ Get absolute path to resource, works for dev and for PyInstaller """
+            base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+            return os.path.join(base_path, relative_path)
+
+        # Use the resource_path function to get the path of the image
+        guide_image = PhotoImage(file=resource_path("img\\guide.PNG"))
         image_label = Label(frame, image=guide_image, bg=self.bg_color)
         image_label.image = guide_image
         image_label.pack(pady=20)

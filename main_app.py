@@ -79,7 +79,7 @@ class MainApp:
         instructions.config(state="disabled")
         instructions.pack(pady=30)
 
-        guide_image = PhotoImage(file="guide.PNG")
+        guide_image = PhotoImage(file="img/guide.PNG")
         image_label = Label(frame, image=guide_image, bg=self.bg_color)
         image_label.image = guide_image
         image_label.pack(pady=20)

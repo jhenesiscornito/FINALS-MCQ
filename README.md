@@ -18,7 +18,12 @@ cd mcq-randomizer
 pip install -r requirements.txt
 ```
 
-## Usage
+## Converting to exe file using Pyinstaller
+
+  ```bash 
+pip install pyinstaller
+  ```
+
   If the guide.PNG file is in the same directory as your main_app.py file, you should use the following command:
 
 ```bash 

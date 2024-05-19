@@ -46,3 +46,11 @@ There's a bug when changing the icon via PyInstaller. As a workaround, you can u
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change. 
+
+## BIG THANKS and Special mention.
+[Jhenesis Cornito](https://www.facebook.com/jhenesiscornito?mibextid=ZbWKwL)
+
+[Ian Vergel Cañete](https://www.facebook.com/ian.vergell?mibextid=ZbWKwL)
+
+[Virgie Rose Lacandula](https://www.facebook.com/profile.php?id=100010590542986&mibextid=ZbWKwL)
+

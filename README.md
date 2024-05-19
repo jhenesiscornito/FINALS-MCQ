@@ -19,6 +19,7 @@ pip install -r requirements.txt
 ```
 
 ## Converting to exe file using Pyinstaller
+Install PyInstaller to convert the project to an EXE file:
 
   ```bash 
 pip install pyinstaller
@@ -37,10 +38,10 @@ pyinstaller --onefile --windowed --add-data "img/guide.PNG;img" --add-data "exam
 ```
 
 ## LIMITATION
-There's a limitation on this project it only detects 1 bold answer on the excel file.
+This project only detects one bold answer in the Excel file.
 
 ## Known Issues
-There's a bug when changing icon via PyInstaller. As a workaround, you can use Resource Hacker to change the icon of the exe file. You can download Resource Hacker from 
+There's a bug when changing the icon via PyInstaller. As a workaround, you can use Resource Hacker to change the icon of the EXE file. You can download Resource Hacker from 
 [here](https://www.angusj.com/resourcehacker/).
 
 ## Contributing

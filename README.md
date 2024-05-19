@@ -31,6 +31,9 @@ If the guide.PNG file is inside an img directory which is in the same directory 
 pyinstaller --onefile --windowed --add-data "img/guide.PNG;img" --add-data "exam_gui.py;." --add-data "file_handler.py;." --add-data "login_gui.py;." main_app.py
 ```
 
+## LIMITATION
+There's a limitation on this project it only detects 1 bold answer on the excel file.
+
 ## Known Issues
 There's a bug when changing icon via PyInstaller. As a workaround, you can use Resource Hacker to change the icon of the exe file. You can download Resource Hacker from 
 [here](https://www.angusj.com/resourcehacker/).

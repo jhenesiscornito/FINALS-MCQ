@@ -3,7 +3,7 @@ from tkinter.filedialog import askopenfilename
 from login_gui import LoginGUI
 from exam_gui import ExamGUI
 from file_handler import FileHandler
-from openpyxl import load_workbook
+
 
 class MainApp:
     def __init__(self):

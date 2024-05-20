@@ -1,6 +1,8 @@
 from tkinter import Tk, Button, Label, Frame, Radiobutton, StringVar
 import random
 
+## kakapoy sa pag code oy maong ga copy paste rako sa ai na code
+
 class ExamGUI:
     def __init__(self, bg_color, fg_color, button_color, center_window, is_cell_bold):
         self.bg_color = bg_color
@@ -19,7 +21,7 @@ class ExamGUI:
         frame = Frame(exam)
         frame.pack(expand=True)
 
-        selected_choice = StringVar(value="")  # Initialize with an empty string
+        selected_choice = StringVar(value="")  # Initialize ang selected_choice to an empty string
         error_label = None
 
         questions = []
@@ -40,15 +42,19 @@ class ExamGUI:
         total_questions = len(questions)
         current_question_index = [0]
 
-        # Convert time limit to seconds and create a label to display it
+        # e define ang timer_label ug time_left
+        timer_label = None
+        time_left = [0]
+
+        # e convert ang time_limit sa seconds
         if time_limit is not None:
             time_left = [time_limit * 60]
             timer_label = Label(exam, text=f"Time left: {time_left[0]} seconds")
             timer_label.pack(anchor='center', expand=True)
 
         def update_timer():
-            if current_question_index[0] >= total_questions:  # Check if all questions have been answered
-                return  # If they have, return without scheduling the next call to update_timer
+            if current_question_index[0] >= total_questions:  # e check kung na answeran na ang tanan nga questions
+                return  # og mao, i return ang function
 
             time_left[0] -= 1
             hours, remainder = divmod(time_left[0], 3600)
@@ -77,8 +83,8 @@ class ExamGUI:
             # If time is not yet up, schedule the next call to update_timer
             exam.after(1000, update_timer)
 
-        def check_answers():
-            nonlocal correct_answers, error_label
+        def check_answers(event=None):
+            nonlocal correct_answers, error_label, timer_label  # Add timer_label here
             user_answer = selected_choice.get()
 
             # Check if an answer is selected
@@ -109,8 +115,12 @@ class ExamGUI:
                 score_label = Label(frame, text=f"Final Score: {correct_answers} / {total_questions}")
                 score_label.pack()
 
-                # Hide the timer label
-                timer_label.pack_forget()
+                # tagoan ang timer label
+                if time_limit is not None:  # e hide ang timer label kung naay time limit
+                    timer_label.pack_forget()
+
+                    # Hide the submit button
+                submit_button.pack_forget()
 
                 # Display the remaining time
                 hours, remainder = divmod(time_left[0], 3600)
@@ -119,7 +129,10 @@ class ExamGUI:
                                              text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds")
                 remaining_time_label.pack()
 
-                submit_button.pack_forget()
+                # Add an exit button
+                exit_button = Button(frame, text="Exit", command=exam.destroy)
+                exit_button.pack()
+
             else:
                 display_question()
 
@@ -128,7 +141,7 @@ class ExamGUI:
                 widget.destroy()
 
             question = questions[current_question_index[0]]
-            question_label = Label(frame, text=question,
+            question_label = Label(frame, text=f"Question {current_question_index[0] + 1}: {question}",
                                    font=("Helvetica", 12, "bold"),
                                    bg="lightblue",
                                    fg="darkblue",
@@ -137,6 +150,7 @@ class ExamGUI:
 
             selected_choice.set(None)  # Reset the selected choice
             submit_button.config(state="disabled")  # Disable the submit button
+            exam.unbind('<Return>')  # Unbind the <Return> key event
 
             choices = options[current_question_index[0]]
             for idx, choice in enumerate(choices):
@@ -151,10 +165,12 @@ class ExamGUI:
 
         def enable_submit():
             submit_button.config(state="normal")  # Enable the submit button when a choice is selected
+            # Bind the ENTER key to the check_answers function
+            exam.bind('<Return>', check_answers)
 
-        submit_button = Button(exam, text="Submit", command=check_answers,
-                               state="disabled")  # Initially disable the submit button
+        submit_button = Button(exam, text="Submit", command=check_answers, state="disabled")  # Initially disable the submit button
         submit_button.pack(anchor='center', expand=True)
+
 
         # Start the timer only if time limit is not None
         if time_limit is not None:

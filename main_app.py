@@ -36,7 +36,7 @@ class MainApp:
         def select_file():
             file_path[0] = askopenfilename(filetypes=[("Excel files", "*.xlsx")])
 
-        def upload_file():
+        def upload_file(event=None):
             time_limit = time_limit_entry.get()
             if not time_limit:
                 error_label.config(text="Time limit is required.")
@@ -64,17 +64,6 @@ class MainApp:
 
         frame = Frame(root, bg=self.bg_color)
         frame.pack()
-
-        # instructions1 = Label(frame, text="EXCEL FILE MUST BE IN THIS FORMAT", bg=self.bg_color, fg=self.fg_color,
-        #                     font=("Helvetica", 18, "bold"))
-        #
-        # instructions = Label(frame, text="1. All Questions Must be in Column A.\n"
-        #                                  "2. All Choices from A to D must be in column B to E.\n"
-        #                                  "NOTE: The entire question and its choices must be on row 1.\n"
-        #                                  "3. Cells with correct answers must be in BOLD Letters.\n"
-        #                                  "Here's an example layout:\n", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 11))
-        # instructions1.pack(pady=40)
-        # instructions.pack(pady=10)
 
         instructions = Text(frame, bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 11), wrap="word", height=9, width=60, borderwidth=0)
         instructions.insert("1.0", "EXCEL FILE MUST BE IN THIS FORMAT\n\n", "title")
@@ -118,6 +107,10 @@ class MainApp:
 
         upload_button = Button(frame, text="Start Quiz", command=upload_file, bg=self.fg_color, fg=self.bg_color, font=("Helvetica", 12, "bold"))
         upload_button.pack(pady=10)
+
+        # Bind the ENTER key to the upload_file function
+        root.bind('<Return>', upload_file)
+
 
         root.mainloop()
 

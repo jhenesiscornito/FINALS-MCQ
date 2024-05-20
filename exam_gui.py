@@ -11,10 +11,11 @@ class ExamGUI:
         self.center_window = center_window
         self.is_cell_bold = is_cell_bold
 
-    def create(self, ws, time_limit):
+    def create(self, ws, time_limit, fname, lname, year, section, course):
         exam = Tk()
         exam.title("Student's Exam")
         exam.geometry("1000x700")
+        exam.configure(bg=self.bg_color)
 
         self.center_window(exam, 1000, 700)
 
@@ -59,13 +60,13 @@ class ExamGUI:
             time_left[0] -= 1
             hours, remainder = divmod(time_left[0], 3600)
             minutes, seconds = divmod(remainder, 60)
-            timer_label.config(text=f"Time left: {hours} hours, {minutes} minutes, {seconds} seconds")
+            timer_label.config(text=f"Time left: {hours} hours, {minutes} minutes, {seconds} seconds", bg=self.bg_color, fg=self.fg_color)
 
             if time_left[0] <= 0:
                 for widget in frame.winfo_children():
                     widget.destroy()
 
-                score_label = Label(frame, text=f"Final Score: {correct_answers} / {total_questions}")
+                score_label = Label(frame, text=f"Final Score: {correct_answers} / {total_questions}", bg=self.bg_color, fg=self.fg_color)
                 score_label.pack()
 
                 # Hide the timer label
@@ -74,7 +75,7 @@ class ExamGUI:
                 # Display the remaining time
                 hours, remainder = divmod(time_left[0], 3600)
                 minutes, seconds = divmod(remainder, 60)
-                remaining_time_label = Label(frame, text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds")
+                remaining_time_label = Label(frame, text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds", bg=self.bg_color, fg=self.fg_color)
                 remaining_time_label.pack()
 
                 submit_button.pack_forget()
@@ -90,7 +91,7 @@ class ExamGUI:
             # Check if an answer is selected
             if not user_answer:
                 if error_label is None:
-                    error_label = Label(frame, text="Please select an answer before submitting.")
+                    error_label = Label(frame, text="Please select an answer before submitting.", bg=self.bg_color, fg=self.fg_color)
                     error_label.pack()
                 return
             else:
@@ -112,25 +113,26 @@ class ExamGUI:
                 for widget in frame.winfo_children():
                     widget.destroy()
 
-                score_label = Label(frame, text=f"Final Score: {correct_answers} / {total_questions}")
-                score_label.pack()
-
-                # tagoan ang timer label
-                if time_limit is not None:  # e hide ang timer label kung naay time limit
-                    timer_label.pack_forget()
-
-                    # Hide the submit button
-                submit_button.pack_forget()
-
                 # Display the remaining time
                 hours, remainder = divmod(time_left[0], 3600)
                 minutes, seconds = divmod(remainder, 60)
-                remaining_time_label = Label(frame,
-                                             text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds")
-                remaining_time_label.pack()
+
+                # Display the user's information
+                Label(frame, text=f"{fname} {lname} COURSE: {course}  YEAR LEVEL: {year} SECTION: {section}", font=("Helvetica", 15), bg=self.bg_color, fg=self.fg_color).pack()
+                Label(frame, text=f"Final Score: {correct_answers} / {total_questions}", font=("Helvetica", 12), bg=self.bg_color, fg=self.fg_color).pack()
+
+                if time_limit is not None:
+                    remaining_time_label = Label(frame, text=f"Remaining time: {hours} hours, {minutes} minutes, {seconds} seconds", bg=self.bg_color, fg=self.fg_color)
+                    remaining_time_label.pack()
+
+                if time_limit is not None and timer_label is not None:
+                    timer_label.pack_forget()
+
+                # Hide the submit button
+                submit_button.pack_forget()
 
                 # Add an exit button
-                exit_button = Button(frame, text="Exit", command=exam.destroy)
+                exit_button = Button(frame, text="Exit", command=exam.destroy, bg=self.bg_color, fg=self.fg_color)
                 exit_button.pack()
 
             else:
@@ -141,11 +143,7 @@ class ExamGUI:
                 widget.destroy()
 
             question = questions[current_question_index[0]]
-            question_label = Label(frame, text=f"Question {current_question_index[0] + 1}: {question}",
-                                   font=("Helvetica", 12, "bold"),
-                                   bg="lightblue",
-                                   fg="darkblue",
-                                   )
+            question_label = Label(frame, text=f"Question {current_question_index[0] + 1}: {question}", font=("Helvetica", 12, "bold"),bg=self.bg_color, fg=self.fg_color)
             question_label.pack()
 
             selected_choice.set(None)  # Reset the selected choice
@@ -159,8 +157,7 @@ class ExamGUI:
                                             command=enable_submit,
                                             font=("Helvetica", 12, "bold"),
                                             bg="lightblue",
-                                            fg="darkblue",
-                                            )
+                                            fg="darkblue",)
                 choice_button.pack()
 
         def enable_submit():

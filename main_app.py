@@ -5,6 +5,7 @@ from tkinter.filedialog import askopenfilename
 from login_gui import LoginGUI
 from exam_gui import ExamGUI
 from file_handler import FileHandler
+from UserInput import UserInputGUI
 
 
 class MainApp:
@@ -15,6 +16,7 @@ class MainApp:
         self.login_gui = LoginGUI(self.bg_color, self.fg_color, self.button_color, self.center_window, self.create_gui)
         self.exam_gui = ExamGUI(self.bg_color, self.fg_color, self.button_color, self.center_window, self.is_cell_bold)
         self.file_handler = FileHandler()
+        self.user_input_gui = UserInputGUI(self.bg_color, self.fg_color, self.exam_gui, self.button_color)
 
     def center_window(self, window, width=500, height=400):
         screen_width = window.winfo_screenwidth()
@@ -60,7 +62,7 @@ class MainApp:
             if ws:
                 root.destroy()
                 # If time limit is 0, pass None instead
-                self.exam_gui.create(ws, None if time_limit == 0 else time_limit)
+                self.user_input_gui.create(ws, None if time_limit == 0 else time_limit)
 
         frame = Frame(root, bg=self.bg_color)
         frame.pack()
@@ -94,9 +96,8 @@ class MainApp:
         image_label.pack(pady=20)
 
         Label(frame, text="Time Limit (in minutes):", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 12)).pack()
-
         validate_command = root.register(lambda input: input.isdigit() or input == "")
-        time_limit_entry = Entry(frame, validate="key", validatecommand=(validate_command, "%P"), bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9))
+        time_limit_entry = Entry(frame, width=10, justify='center', validate="key", validatecommand=(validate_command, "%P"), bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9))
         time_limit_entry.pack()
 
         error_label = Label(frame, text="", bg=self.bg_color, fg=self.fg_color)

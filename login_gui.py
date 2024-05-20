@@ -23,11 +23,11 @@ class LoginGUI:
         title_label.place(relx=0.5, rely=0.2, anchor='center')
 
         Label(login, text="Username", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 12)).place(relx=0.5, rely=0.3, anchor='center')
-        username_entry = Entry(login, bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9))
+        username_entry = Entry(login, bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9), justify='center')
         username_entry.place(relx=0.5, rely=0.4, anchor='center')
 
         Label(login, text="Password", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 12)).place(relx=0.5, rely=0.5, anchor='center')
-        password_entry = Entry(login, show="*", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9))
+        password_entry = Entry(login, show="*", bg=self.bg_color, fg=self.fg_color, font=("Helvetica", 9), justify='center')
         password_entry.place(relx=0.5, rely=0.6, anchor='center')
 
         error_label = Label(login, bg=self.bg_color, fg=self.fg_color)

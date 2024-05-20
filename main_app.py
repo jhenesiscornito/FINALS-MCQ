@@ -105,7 +105,7 @@ class MainApp:
         select_button = Button(frame, text="Select Excel File", command=select_file, bg=self.fg_color, fg=self.bg_color, font=("Helvetica", 12))
         select_button.pack(pady=10)
 
-        upload_button = Button(frame, text="Start Quiz", command=upload_file, bg=self.fg_color, fg=self.bg_color, font=("Helvetica", 12, "bold"))
+        upload_button = Button(frame, text="Upload", command=upload_file, bg=self.fg_color, fg=self.bg_color, font=("Helvetica", 12, "bold"))
         upload_button.pack(pady=10)
 
         # Bind the ENTER key to the upload_file function

@@ -207,6 +207,13 @@ class ExamGUI:
                                             fg=self.fg_color)
                 choice_button.pack()
 
+        # cheating_quote = Label(exam, text='"I would prefer even to fail with honor than win by cheating"\n'
+        #                                     "                                               — Sophocles",
+        #                         fg=self.fg_color,
+        #                         bg=self.bg_color,
+        #                         font=("Helvetica", 12, "italic", "bold"))
+        # cheating_quote.pack()
+        
         def enable_submit():
             submit_button.config(state="normal")  # Enable the submit button when a choice is selected
             # Bind the ENTER key to the check_answers function
@@ -218,7 +225,6 @@ class ExamGUI:
                                bg=self.bg_color, 
                                font=("Helvetica", 12, "bold"))
         submit_button.pack(anchor='center', expand=True)
-
 
         # Start the timer only if time limit is not None
         if time_limit is not None:

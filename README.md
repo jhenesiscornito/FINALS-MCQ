@@ -52,5 +52,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [Ian Vergel Cañete](https://www.facebook.com/ian.vergell?mibextid=ZbWKwL)
 
+[Arcee Luceno](https://www.facebook.com/suchamisfit2)
+
 [Virgie Rose Lacandula](https://www.facebook.com/profile.php?id=100010590542986&mibextid=ZbWKwL)
 
